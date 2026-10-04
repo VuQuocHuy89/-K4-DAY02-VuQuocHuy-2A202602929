@@ -9,12 +9,14 @@ import pandas as pd
 SHEET_COLUMNS = {
     "Backbones": [
         "exp_id", "backbone", "pretrained_tag", "params_m", "gmacs", "img_size",
-        "epochs", "seed", "macro_f1_val", "top1_val", "train_seconds_per_epoch",
+        "epochs", "seed", "best_epoch", "macro_f1_val", "top1_val",
+        "chinee_recall_val", "snake_recall_val", "train_seconds_per_epoch",
         "latency_batch1_ms", "notes",
     ],
     "Training": [
         "exp_id", "backbone", "axis", "change_from_T00", "seed", "macro_f1_val",
-        "top1_val", "delta_macro_f1_vs_T00", "rare_class_f1", "notes",
+        "top1_val", "chinee_recall_val", "snake_recall_val",
+        "delta_macro_f1_vs_T00", "rare_class_f1", "notes",
     ],
     "Inference": [
         "exp_id", "method", "checkpoint", "views_or_models", "macro_f1_val",

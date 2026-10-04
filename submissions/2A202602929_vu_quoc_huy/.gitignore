@@ -1,14 +1,14 @@
-# Model weights and resumable optimizer checkpoints are local artifacts.
-!runs/
-!runs/**/
-!eval_out/
-!eval_out/**/
-runs/**/*.pt
-runs/**/*.pth
-runs/**/*.ckpt
-runs/**/*.tmp
+# Checkpoints, optimizer states, logits and detailed run logs stay in Kaggle output.
+runs/
+eval_out/
+*.pt
+*.pth
+*.ckpt
+*.npz
+*.tmp
 
 # Never add copied datasets or Python-generated cache files.
 data/
+lab_resume.zip
 **/__pycache__/
 **/.ipynb_checkpoints/

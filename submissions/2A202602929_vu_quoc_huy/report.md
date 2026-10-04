@@ -42,7 +42,7 @@ Diễn giải khác biệt nhỏ hơn độ lệch chuẩn là chưa phân biệ
 
 Chèn sheet `Inference` và `Latency`. Đoạn benchmark gồm warmup, ít nhất 50 lượt đo và đồng bộ GPU trước/sau. Latency hiện ghi là thời gian forward model, chưa tính đọc ảnh/tiền xử lý; xem điều kiện trong notebook trước khi so với yêu cầu triển khai.
 
-Đính kèm `report_assets/inference_accuracy_latency.png`. So sánh 1-view, flip TTA, five-crop TTA, gộp xác suất/logit và temperature scaling. Temperature cuối được fit trên xác suất validation của cấu hình inference đã chọn ở seed 0, rồi giữ cố định cho các seed final. ECE validation trước/sau: `[điền]`.
+Đính kèm `report_assets/inference_accuracy_latency.png`. So sánh 1-view, flip TTA, five-crop TTA, gộp xác suất/logit và temperature scaling. Sau khi chốt phương pháp inference bằng validation, mỗi seed final fit nhiệt độ riêng trên validation của chính seed đó rồi áp dụng nguyên giá trị lên test. Ghi các giá trị T và ECE validation trước/sau: `[điền]`.
 
 ## 6. Kết quả cuối trên test
 

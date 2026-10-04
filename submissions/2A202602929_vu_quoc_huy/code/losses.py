@@ -147,4 +147,12 @@ def mixed_loss(criterion, logits, targets):
     if not isinstance(targets, (tuple, list)) or len(targets) != 3:
         return criterion(logits, targets)
     y_a, y_b, lam = targets
+    if isinstance(criterion, nn.CrossEntropyLoss) and criterion.weight is not None:
+        # Normalize by the weights of the mixed targets, not by each label
+        # group separately; this matches weighted CE's mean reduction.
+        weight = criterion.weight.to(device=logits.device, dtype=logits.dtype)
+        loss_a = F.cross_entropy(logits, y_a, weight=weight, reduction="none")
+        loss_b = F.cross_entropy(logits, y_b, weight=weight, reduction="none")
+        normalizer = float(lam) * weight[y_a].sum() + (1.0 - float(lam)) * weight[y_b].sum()
+        return (float(lam) * loss_a.sum() + (1.0 - float(lam)) * loss_b.sum()) / normalizer
     return float(lam) * criterion(logits, y_a) + (1.0 - float(lam)) * criterion(logits, y_b)

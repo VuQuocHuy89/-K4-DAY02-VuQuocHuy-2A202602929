@@ -70,7 +70,8 @@ class Config:
     save_test_predictions: bool = False
     inference_method: str = "I00"
     inference_aggregation: str = "prob"
-    temperature: float = 1.0
+    # None fits one temperature on this run's validation predictions before test.
+    temperature: float | None = 1.0
     inference_crop_size: int = 224
     inference_scales: tuple[int, ...] = (224, 256)
     resume: bool = True
@@ -541,6 +542,7 @@ def run(cfg: Config) -> dict:
         logits=val_logits,
     )
     final_val_names, final_val_labels, final_val_probs = val_names, val_labels, val_probs
+    effective_temperature = cfg.temperature
     if cfg.save_test_predictions:
         # The selected inference method is applied to validation for matching
         # reporting and then to test exactly once below.
@@ -557,15 +559,25 @@ def run(cfg: Config) -> dict:
                 cfg.batch_size, train=False, sampler=None,
                 num_workers=cfg.num_workers,
             )
-        final_val_names, final_val_labels, final_val_probs = inference.predict_probabilities(
+        final_val_names, final_val_labels, uncalibrated_val_probs = inference.predict_probabilities(
             network,
             final_val_loader,
             device,
             method=cfg.inference_method,
-            temperature=cfg.temperature,
+            temperature=1.0,
             aggregation=cfg.inference_aggregation,
             crop_size=cfg.inference_crop_size,
             scales=cfg.inference_scales,
+        )
+        if effective_temperature is None:
+            # Fit on this seed's validation set, after choosing the inference method.
+            effective_temperature = inference.fit_temperature(
+                np.log(np.clip(uncalibrated_val_probs, 1e-12, 1.0)),
+                final_val_labels,
+            )
+        final_val_probs = inference.apply_temperature(
+            np.log(np.clip(uncalibrated_val_probs, 1e-12, 1.0)),
+            effective_temperature,
         )
         np.savez_compressed(
             output_dir / "val_final_predictions.npz",
@@ -601,6 +613,7 @@ def run(cfg: Config) -> dict:
         "checkpoint": str(output_dir / "best.pt"),
         "split": split_report,
         "history": history,
+        "temperature_used": effective_temperature,
     }
 
     if test_loader is not None:
@@ -610,7 +623,7 @@ def run(cfg: Config) -> dict:
             test_loader,
             device,
             method=cfg.inference_method,
-            temperature=cfg.temperature,
+            temperature=effective_temperature,
             aggregation=cfg.inference_aggregation,
             crop_size=cfg.inference_crop_size,
             scales=cfg.inference_scales,
