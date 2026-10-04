@@ -2,7 +2,7 @@
 
 ## Notebook
 
-- Kaggle notebook: **[DÁN LINK NOTEBOOK KAGGLE SAU KHI TẠO]**
+- Kaggle notebook: **[Lab Day 2 — Vu Quoc Huy](https://www.kaggle.com/code/quchuy2k4/lab-day2-vuquochuy-2a202602929)**
 - Chạy notebook `code/lab_day2.ipynb` theo thứ tự từ trên xuống. Notebook đọc bộ dữ liệu đã gắn vào Kaggle Input:
   - `/kaggle/input/datasets/quchuy2k4/images`
   - `/kaggle/input/datasets/quchuy2k4/files-csv/file-csv`

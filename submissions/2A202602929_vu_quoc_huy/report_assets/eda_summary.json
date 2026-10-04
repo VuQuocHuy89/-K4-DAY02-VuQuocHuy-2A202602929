@@ -1,0 +1,13 @@
+{
+  "train_class_imbalance_max_over_min": 9.029752066115703,
+  "sample_image_sizes": [
+    [
+      256,
+      256
+    ]
+  ],
+  "sample_image_modes": [
+    "RGB"
+  ],
+  "sampled_images_per_class": 3
+}
