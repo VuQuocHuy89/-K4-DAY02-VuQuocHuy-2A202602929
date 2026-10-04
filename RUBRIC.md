@@ -159,19 +159,19 @@ Ghi chú:
 
 ## 5. Danh sách tự kiểm trước khi nộp
 
-- [ ] Dùng đúng fold 0, không sửa CSV, không gộp val vào train; đã chạy kiểm tra giao rỗng và hợp đủ 17.509 ảnh.
-- [ ] ≥ 5 backbone, cùng công thức nền, ghi tag trọng số.
-- [ ] ≥ 3 trục công thức huấn luyện, mỗi lần chạy khác nền một yếu tố.
-- [ ] ≥ 4 phương pháp suy luận, độ trễ p50/p95/p99 đo đúng cách.
-- [ ] Cấu hình cuối và mốc (`T00` + `I00`) chạy ≥ 3 seed, báo cáo mean ± std; test chạy **một lần mỗi seed**.
-- [ ] `predictions/<exp_id>_seed<k>_test.csv` đủ cho chung kết và mốc, mọi seed, đúng cột.
-- [ ] `python eval.py score` chạy không lỗi trên mọi nhóm file dự đoán; macro-F1, top-1, recall Chinee apple và Snake weed trong báo cáo khớp kết quả của `eval.py`.
-- [ ] Đã chạy `python eval.py grade` và xem kết quả phần I (đề xuất).
-- [ ] Không còn `NotImplementedError` trong `code/`; không sửa `eval.py`.
-- [ ] Đã nêu một cấu hình có p95 ≤ 100 ms ở batch 1 (hoặc giải thích vì sao không có).
-- [ ] `results.xlsx` đủ sheet, `exp_id` khớp ảnh trong `curves/`.
-- [ ] Mỗi thí nghiệm huấn luyện có ảnh biểu đồ riêng.
-- [ ] Báo cáo có tóm tắt, bảng so sánh, ma trận nhầm lẫn, kết luận, hạn chế (nêu chia ngẫu nhiên có thể lạc quan).
-- [ ] Code đầy đủ, README riêng có link notebook chạy lại được.
-- [ ] Không commit dataset hoặc checkpoint lớn.
-- [ ] Mọi số liệu đến từ lần chạy thật của bạn.
+- [x] Dùng đúng fold 0, không sửa CSV, không gộp val vào train; đã chạy kiểm tra giao rỗng và hợp đủ 17.509 ảnh.
+- [x] ≥ 5 backbone, cùng công thức nền, ghi tag trọng số.
+- [x] ≥ 3 trục công thức huấn luyện, mỗi lần chạy khác nền một yếu tố.
+- [x] ≥ 4 phương pháp suy luận, độ trễ p50/p95/p99 đo đúng cách.
+- [x] Cấu hình cuối và mốc (`T00` + `I00`) chạy ≥ 3 seed, báo cáo mean ± std; test chạy **một lần mỗi seed**.
+- [x] `predictions/<exp_id>_seed<k>_test.csv` đủ cho chung kết và mốc, mọi seed, đúng cột.
+- [x] `python eval.py score` chạy không lỗi trên mọi nhóm file dự đoán; macro-F1, top-1, recall Chinee apple và Snake weed trong báo cáo khớp kết quả của `eval.py`.
+- [x] Đã chạy `python eval.py grade` và xem kết quả phần I (đề xuất).
+- [x] Không còn `NotImplementedError` trong `code/`; không sửa `eval.py`.
+- [x] Đã nêu một cấu hình có p95 ≤ 100 ms ở batch 1 (hoặc giải thích vì sao không có).
+- [x] `results.xlsx` đủ sheet, `exp_id` khớp ảnh trong `curves/`.
+- [x] Mỗi thí nghiệm huấn luyện có ảnh biểu đồ riêng.
+- [x] Báo cáo có tóm tắt, bảng so sánh, ma trận nhầm lẫn, kết luận, hạn chế (nêu chia ngẫu nhiên có thể lạc quan).
+- [x] Code đầy đủ, README riêng có link notebook chạy lại được.
+- [x] Không commit dataset hoặc checkpoint lớn.
+- [x] Mọi số liệu đến từ lần chạy thật của bạn.

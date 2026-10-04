@@ -30,11 +30,11 @@ Các lần train lưu `last.pt` sau mỗi epoch. Sau Bước 1, Bước 2 và B�
 - `curves/`: đường cong train/validation của từng backbone, recipe và seed final.
 - `results.xlsx`: bảy sheet kết quả theo rubric.
 - `report_assets/`: phân bố lớp, ảnh mẫu, đồ thị accuracy-latency, confusion matrix và gallery lỗi.
-- `runs/`: cấu hình, log theo epoch, summary, logits validation và checkpoint cục bộ.
-- `report.md`: dàn ý báo cáo; chỉ điền số sau khi notebook chạy xong.
+- `runs/`: notebook giữ cấu hình, log theo epoch, summary, logits validation và checkpoint trong Kaggle working directory; các file này không nằm trong artifact commit.
+- `report.md`: báo cáo đã điền bằng kết quả của lần chạy Kaggle bên dưới.
 
 ## Môi trường
 
-Notebook ghi các phiên bản Python, PyTorch, torchvision, timm, NumPy, pandas và GPU thật vào `environment.json`. Các con số kết quả và phần cứng trong báo cáo phải lấy từ lần chạy Kaggle thực tế.
+Lần chạy đã nộp dùng seed 0, 1, 2 cho final và baseline; năm backbone và các recipe sàng lọc dùng seed 0. Môi trường thực tế trong `environment.json`: Python 3.13.15, PyTorch 2.11.0+cu128, torchvision 0.26.0+cu128, timm 1.0.29, NumPy 2.1.3, pandas 2.3.3, Tesla T4 ×2 (train trên cuda:0). Các kết quả và phần cứng trong báo cáo được lấy từ lần chạy Kaggle này.
 
-Sau khi chạy xong, tải `submission_artifacts.zip` từ Output của Kaggle, giải nén vào **gốc repo** để lấy predictions, curves, workbook và hình báo cáo; zip này không chứa checkpoint, logits hoặc `runs/`. Điền `report.md`, thêm link Kaggle notebook ở đầu README này, rồi commit các artifact cần nộp vào fork. Lưu `lab_resume.zip` riêng để có thể tái lập/tiếp tục; không giải nén hoặc commit ZIP này vào fork.
+Với lần chạy đã hoàn thành, các file trong `submission_artifacts.zip` đã được giải nén vào thư mục submission, báo cáo đã điền, link Kaggle đã thêm và artifact đã commit lên fork. ZIP kết quả không chứa checkpoint, logits hoặc thư mục `runs/`; `lab_resume.zip` được giữ riêng để tiếp tục/tái lập, không commit vào fork.
