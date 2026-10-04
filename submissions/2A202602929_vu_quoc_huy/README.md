@@ -15,7 +15,7 @@
 1. Cài thư viện, ghi phiên bản môi trường, xác nhận GPU và đường dẫn dữ liệu.
 2. Chạy EDA và kiểm tra fold 0: số ảnh, giao giữa các split, ảnh thiếu, phân bố lớp, ảnh mẫu.
 3. Chạy kiểm tra pipeline: batch/nhãn, focal loss với `gamma=0`, Mixup/CutMix, overfit batch nhỏ, gộp Conv-BN; kiểm tra một optimizer step ở đúng batch size và tải trước pretrained weights cho cả năm backbone. Nếu bước này báo OOM, giảm `BATCH_SIZE` xuống 32 **trước** lượt train dài đầu tiên.
-4. So sánh năm backbone với 12 epoch, cùng seed/split/recipe; chọn backbone bằng macro-F1 validation và chi phí. Chạy T00–T07: khởi tạo, CutMix, color jitter, focal loss, class-balanced CE (`beta=0.999`) và EMA (`decay=0.995`) mỗi lần chỉ đổi một yếu tố. T08 kết hợp hai yếu tố chọn bằng validation.
+4. So sánh năm backbone với 15 epoch, cùng seed/split/recipe; chọn backbone bằng macro-F1 validation và chi phí. Chạy T00–T07: khởi tạo, CutMix, color jitter, focal loss, class-balanced CE (`beta=0.999`) và EMA (`decay=0.995`) mỗi lần chỉ đổi một yếu tố. T08 kết hợp hai yếu tố chọn bằng validation.
 5. So sánh các phương pháp inference, hiệu chuẩn nhiệt độ trên validation, đo độ trễ có warmup và đồng bộ GPU.
 6. Xem bảng/đồ thị validation, chốt cấu hình rồi đổi `RUN_FINAL_TEST = False` thành `True` trong cell final. Chỉ sau đó mới chạy final và baseline với **20 epoch** cho seed 0, 1, 2. Mỗi final seed fit một nhiệt độ trên validation của chính seed đó rồi áp dụng nguyên giá trị cho test. Cell kiểm tra cấu hình để không chạy lại test đã có.
 7. Chạy `eval.py score`, `eval.py grade`, tạo `results.xlsx`, biểu đồ và ảnh phân tích lỗi.
