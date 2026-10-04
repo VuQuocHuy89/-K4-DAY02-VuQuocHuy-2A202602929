@@ -1,0 +1,14 @@
+# Model weights and resumable optimizer checkpoints are local artifacts.
+!runs/
+!runs/**/
+!eval_out/
+!eval_out/**/
+runs/**/*.pt
+runs/**/*.pth
+runs/**/*.ckpt
+runs/**/*.tmp
+
+# Never add copied datasets or Python-generated cache files.
+data/
+**/__pycache__/
+**/.ipynb_checkpoints/
